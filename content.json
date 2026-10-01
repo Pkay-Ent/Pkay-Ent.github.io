@@ -1,0 +1,42 @@
+{
+  "notice": "",
+  "tutorials": [
+    {
+      "id": "win11-usb",
+      "title": "Install Windows 11 from a USB flash drive",
+      "category": "Windows",
+      "level": "Beginner",
+      "time": "45 min",
+      "video": "",
+      "steps": [
+        "Back up your files. A clean install erases the drive you install on.",
+        "On another working PC, download the Windows 11 Media Creation Tool from microsoft.com.",
+        "Plug in a USB drive of 8 GB or more and use the tool to create the installation USB.",
+        "Plug the USB into the target PC, restart, and press the boot menu key (often F12, F2, Esc or Del).",
+        "Choose the USB drive, pick your language, and click Install now.",
+        "Select Custom install, choose the drive or partition, and click Next.",
+        "Wait for the restarts, then set up your region, account and privacy options.",
+        "Open Windows Update and install drivers and updates."
+      ]
+    },
+    {
+      "id": "kali-dual",
+      "title": "Dual-boot Kali Linux with Windows",
+      "category": "Linux",
+      "level": "Intermediate",
+      "time": "1 hour",
+      "video": "",
+      "steps": [
+        "Back up your important files first. Changing partitions always carries some risk.",
+        "In Windows, open Disk Management, right-click your main drive and choose Shrink Volume to free at least 40 GB.",
+        "Turn off Fast Startup in Windows power options so the drive is released properly.",
+        "Download the Kali Linux installer ISO from kali.org and write it to a USB drive using Rufus or balenaEtcher.",
+        "Restart, open the boot menu, and boot from the USB drive.",
+        "Choose Graphical install and follow the language and network steps.",
+        "At partitioning, choose Manual and install only into the free space you created.",
+        "Finish the install, restart, and pick Kali or Windows from the boot menu."
+      ]
+    }
+  ],
+  "signals": []
+}

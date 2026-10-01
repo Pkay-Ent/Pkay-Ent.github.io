@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pkay Ent. & Services | PC Setup, Graphic Design & Data Entry in Accra</title>
+<meta name="description" content="Windows and Linux installation, CorelDRAW graphic design, image-to-text transcription into Word, fast accurate data entry in Excel, typing and web research. Based in Accra, Ghana. Onsite and remote.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#14142B; --text:#E6E8F5; --indigo:#07080F; --iris:#7B82E0; --sun:#DDB04A; --teal:#2FA595;
+    --paper:#0B0C16; --bg2:#10121F; --surface:#171A30; --white:#F2F3FA; --muted:#A3A7C7; --line:#262A4D;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; scroll-padding-top:70px; }
+  body { font-family:'DM Sans','Segoe UI',Arial,sans-serif; background:var(--paper); color:var(--text); line-height:1.6; font-size:17px; }
+  h1,h2,h3 { font-family:'Bricolage Grotesque','Segoe UI',Arial,sans-serif; line-height:1.1; }
+  a { color:inherit; }
+  a:focus-visible, .btn:focus-visible { outline:3px solid var(--sun); outline-offset:3px; }
+  .wrap { max-width:1080px; margin:0 auto; padding:0 22px; }
+
+  /* Header */
+  header { position:sticky; top:0; z-index:20; background:var(--indigo); color:var(--white); }
+  header .wrap { display:flex; justify-content:space-between; align-items:center; height:62px; }
+  .logo { font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.25rem; text-decoration:none; }
+  .logo b { color:var(--sun); }
+  nav a { margin-left:22px; text-decoration:none; font-size:.95rem; opacity:.85; }
+  nav a:hover { opacity:1; }
+  nav .nav-cta { background:var(--sun); color:var(--ink); padding:8px 16px; border-radius:99px; font-weight:700; opacity:1; }
+
+  /* Hero */
+  .hero { background:linear-gradient(135deg,#07080F 45%,#1A1D4A); color:var(--white); padding:64px 0 90px; position:relative; overflow:hidden; }
+  .hero .wrap { display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center; position:relative; z-index:1; }
+  .hero h1 { font-size:clamp(2.3rem,5.4vw,3.9rem); font-weight:800; letter-spacing:-.02em; margin-bottom:20px; }
+  .hero h1 em { font-style:normal; background:var(--sun); color:var(--ink); padding:0 .18em; border-radius:6px; }
+  .hero p.lead { color:#C9CBEA; max-width:520px; margin-bottom:30px; font-size:1.1rem; }
+  .btns { display:flex; gap:12px; flex-wrap:wrap; }
+  .btn { display:inline-block; text-decoration:none; font-weight:700; padding:14px 26px; border-radius:99px; transition:transform .15s; }
+  .btn:hover { transform:translateY(-2px); }
+  .btn.primary { background:var(--sun); color:var(--ink); }
+  .btn.ghost { border:2px solid rgba(255,255,255,.35); color:var(--white); }
+  .trust { margin-top:30px; display:flex; gap:22px; flex-wrap:wrap; color:#C9CBEA; font-size:.92rem; }
+  .trust span::before { content:"✓ "; color:var(--sun); font-weight:700; }
+
+  /* Hero tickets */
+  .tickets { display:grid; gap:14px; }
+  .ticket { background:var(--surface); color:var(--text); border-radius:14px; padding:16px 18px; display:flex; gap:14px; align-items:center; box-shadow:0 8px 24px rgba(0,0,0,.35); }
+  .ticket:nth-child(2) { margin-left:28px; }
+  .ticket .ic { font-size:1.6rem; width:46px; height:46px; display:grid; place-items:center; background:var(--bg2); border-radius:12px; flex:none; }
+  .ticket strong { display:block; font-size:.98rem; }
+  .ticket small { color:var(--muted); }
+  .ticket .ok { margin-left:auto; background:rgba(47,165,149,.2); color:#7FE0D0; font-weight:700; font-size:.78rem; padding:4px 10px; border-radius:99px; }
+  .tickets-label { color:#C9CBEA; font-size:.85rem; margin-bottom:2px; }
+
+  /* Sections */
+  section { padding:76px 0; }
+  .sec-head { margin-bottom:38px; max-width:560px; }
+  .sec-head h2 { font-size:clamp(1.8rem,3.6vw,2.5rem); font-weight:800; letter-spacing:-.015em; margin-bottom:10px; }
+  .sec-head p { color:var(--muted); }
+
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr)); gap:20px; }
+  .card { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:28px; border-top:5px solid var(--c,var(--teal)); }
+  .card .ic { font-size:1.9rem; margin-bottom:10px; }
+  .card h3 { font-size:1.3rem; margin-bottom:12px; }
+  .card ul { list-style:none; }
+  .card li { padding:5px 0 5px 22px; position:relative; color:var(--muted); }
+  .card li::before { content:"✓"; position:absolute; left:0; color:var(--teal); font-weight:700; }
+  .card .note { margin-top:12px; font-size:.85rem; color:var(--muted); font-style:italic; }
+
+  /* Steps */
+  .how { background:var(--bg2); }
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr)); gap:28px; counter-reset:s; }
+  .step { counter-increment:s; }
+  .step::before { content:counter(s); display:grid; place-items:center; width:48px; height:48px; border-radius:50%; background:var(--sun); font-family:'Bricolage Grotesque',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px; color:var(--ink); }
+  .step h3 { font-size:1.2rem; margin-bottom:6px; }
+  .step p { color:var(--muted); }
+
+  /* About */
+  .about-box { background:linear-gradient(135deg,#07080F 40%,#161A45); border:1px solid var(--line); color:var(--white); border-radius:26px; padding:48px; display:grid; grid-template-columns:1.2fr .8fr; gap:36px; align-items:center; }
+  .about-box h2 { font-size:clamp(1.8rem,3.4vw,2.4rem); margin-bottom:14px; font-weight:800; }
+  .about-box p { color:#C9CBEA; margin-bottom:12px; }
+  .why { background:rgba(255,255,255,.08); border-radius:18px; padding:24px; }
+  .why li { list-style:none; padding:7px 0; }
+  .why li::before { content:"★ "; color:var(--sun); }
+
+  /* Contact */
+  .contact { text-align:center; }
+  .contact .sec-head { margin:0 auto 34px; }
+  .contact-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr)); gap:18px; max-width:860px; margin:0 auto; }
+  .contact-grid a, .contact-grid div { background:var(--surface); border:1px solid var(--line); border-radius:18px; padding:26px 18px; text-decoration:none; }
+  .contact-grid a:hover { border-color:var(--iris); }
+  .contact-grid .ic { font-size:1.8rem; display:block; margin-bottom:6px; }
+  .contact-grid strong { display:block; }
+  .contact-grid span { color:var(--muted); font-size:.93rem; word-break:break-all; }
+
+  footer { background:#040508; color:#9C9EC4; text-align:center; padding:28px 20px; font-size:.9rem; }
+
+  .wa-float { position:fixed; right:18px; bottom:18px; z-index:30; background:#1F9D55; color:#fff; text-decoration:none; font-weight:700; padding:13px 20px; border-radius:99px; box-shadow:0 8px 22px rgba(0,0,0,.3); }
+
+
+
+  /* Hero PC art */
+  .hero-pc { position:absolute; right:14px; top:8px; width:340px; z-index:0; filter:drop-shadow(0 16px 30px rgba(0,0,0,.6)); }
+  .hero-pc svg { width:100%; height:auto; display:block; }
+  .hero .tickets { margin-top:150px; }
+  .float { animation:none; }
+  @media (prefers-reduced-motion:no-preference) { .float { animation:bob 4s ease-in-out infinite; } .float.b { animation-delay:1.3s; } .float.c { animation-delay:2.4s; } @keyframes bob { 50% { transform:translateY(-7px); } } }
+
+  /* Tutorials */
+  .chips { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:24px; }
+  .chip { background:var(--surface); color:var(--text); border:1px solid var(--line); padding:8px 16px; border-radius:99px; cursor:pointer; font:inherit; font-size:.92rem; }
+  .chip[aria-pressed="true"] { background:var(--sun); color:var(--ink); border-color:var(--sun); font-weight:700; }
+  .meta { color:var(--muted); font-size:.85rem; margin-bottom:12px; }
+  details { border-top:1px solid var(--line); padding-top:12px; margin-top:6px; }
+  summary { cursor:pointer; font-weight:700; color:var(--sun); }
+  details ol { margin:12px 0 4px 20px; color:var(--muted); }
+  details li { padding:4px 0; }
+  .video { position:relative; padding-top:56.25%; margin-top:14px; border-radius:12px; overflow:hidden; }
+  .video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .empty { color:var(--muted); background:var(--surface); border:1px dashed var(--line); border-radius:16px; padding:26px; }
+
+  /* Signals */
+  .disclaimer { background:rgba(224,138,123,.1); border:1px solid rgba(224,138,123,.4); border-radius:14px; padding:14px 18px; color:#F0B8AD; font-size:.92rem; margin-bottom:24px; }
+  .tally { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:22px; }
+  .tally span { background:var(--surface); border:1px solid var(--line); border-radius:99px; padding:6px 16px; font-size:.92rem; }
+  .sig-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+  .sig-head h3 { margin:0; }
+  .badge { font-size:.78rem; font-weight:700; padding:4px 11px; border-radius:99px; background:var(--line); }
+  .badge.buy, .badge.win { background:rgba(47,165,149,.22); color:#7FE0D0; }
+  .badge.sell, .badge.loss { background:rgba(224,138,123,.22); color:#F0B8AD; }
+  .badge.open { background:rgba(221,176,74,.2); color:var(--sun); }
+  .levels { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; text-align:center; margin-bottom:12px; }
+  .levels div { background:var(--bg2); border-radius:10px; padding:8px 4px; }
+  .levels small { display:block; color:var(--muted); font-size:.75rem; }
+  .levels b { font-size:.98rem; }
+  .sig-foot { display:flex; justify-content:space-between; color:var(--muted); font-size:.85rem; }
+
+
+  .notice[hidden] { display:none; }
+  .notice { background:var(--sun); color:var(--ink); text-align:center; padding:10px 16px; font-weight:700; font-size:.95rem; }
+  .sig-note { color:var(--muted); font-size:.88rem; margin-bottom:10px; }
+  .video video { position:absolute; inset:0; width:100%; height:100%; background:#000; }
+
+  /* Earn */
+  .scam { background:rgba(221,176,74,.1); border:1px solid rgba(221,176,74,.4); border-radius:14px; padding:14px 18px; color:#EBD08D; margin-top:24px; font-size:.95rem; }
+
+  @media (max-width:820px) {
+    .hero-pc { position:relative; right:auto; top:auto; width:230px; margin:0 auto 18px; z-index:1; }
+    .hero .tickets { margin-top:0; }
+  }
+
+  /* Hover pop-up effects */
+  .card, .ticket, .contact-grid a, .contact-grid div, .btn, .why { transition:transform .28s cubic-bezier(.2,.8,.3,1.3), box-shadow .28s, border-color .28s; }
+  .card .ic, .ticket .ic, .contact-grid .ic { display:inline-block; transition:transform .35s cubic-bezier(.2,.8,.3,1.5); }
+  .card:hover { transform:translateY(-10px) scale(1.04); border-color:var(--c,var(--teal)); box-shadow:0 20px 44px rgba(0,0,0,.7), 0 0 34px -8px var(--c,var(--teal)); }
+  .card:hover .ic { transform:scale(1.4) rotate(-8deg); }
+  .ticket:hover { transform:translateY(-6px) scale(1.06); box-shadow:0 18px 40px rgba(0,0,0,.6), 0 0 28px -6px var(--sun); }
+  .ticket:hover .ic { transform:scale(1.25) rotate(8deg); }
+  .contact-grid a:hover, .contact-grid div:hover { transform:translateY(-8px) scale(1.05); box-shadow:0 18px 40px rgba(0,0,0,.6); }
+  .contact-grid a:hover .ic, .contact-grid div:hover .ic { transform:scale(1.3); }
+  .btn.primary:hover { box-shadow:0 8px 24px -4px var(--sun); transform:translateY(-3px) scale(1.05); }
+  .why:hover { transform:scale(1.03); }
+  .card:active, .ticket:active, .contact-grid a:active { transform:scale(.97); }
+
+  @media (max-width:480px) {
+    body { font-size:16px; }
+    .wrap { padding:0 16px; }
+    .hero { padding:40px 0 60px; }
+    .btns .btn { width:100%; text-align:center; }
+    .logo { font-size:1.05rem; }
+    nav .nav-cta { padding:7px 12px; font-size:.88rem; }
+    .card { padding:22px; }
+    .card:hover { transform:translateY(-4px) scale(1.02); }
+    .ticket { padding:13px 14px; }
+    .wa-float { padding:11px 16px; right:12px; bottom:12px; }
+    .trust { gap:10px 18px; }
+  }
+
+  @media (max-width:820px) {
+    .hero .wrap, .about-box { grid-template-columns:1fr; }
+    .about-box { padding:30px 24px; }
+    nav a:not(.nav-cta) { display:none; }
+    .ticket:nth-child(2) { margin-left:0; }
+    section { padding:56px 0; }
+  }
+  @media (prefers-reduced-motion:no-preference) {
+    .ticket { animation:rise .6s ease backwards; }
+    .ticket:nth-child(2) { animation-delay:.15s; }
+    .ticket:nth-child(3) { animation-delay:.3s; }
+    @keyframes rise { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+  }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none !important; } .card:hover, .ticket:hover, .contact-grid a:hover, .contact-grid div:hover, .btn:hover, .why:hover { transform:none !important; } }
+</style>
+</head>
+<body>
+<div class="notice" id="notice" hidden></div>
+
+<header>
+  <div class="wrap">
+    <a href="#top" class="logo">Pkay Ent.<b> &amp; Services</b></a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#tutorials">Tutorials</a>
+      <a href="#signals">Forex signals</a>
+      <a href="#earn">Earn online</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-pc" aria-hidden="true">
+  <svg viewBox="0 0 340 280" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#262A6E"/><stop offset="1" stop-color="#0B0C16"/></linearGradient>
+      <linearGradient id="bez" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2E55"/><stop offset="1" stop-color="#12142A"/></linearGradient>
+    </defs>
+    <rect x="14" y="10" width="236" height="156" rx="12" fill="url(#bez)" stroke="#3A3F7A" stroke-width="2"/>
+    <rect x="24" y="20" width="216" height="130" rx="6" fill="url(#scr)"/>
+    <rect x="98" y="38" width="30" height="30" rx="3" fill="#7B82E0"/><rect x="132" y="38" width="30" height="30" rx="3" fill="#2FA595"/>
+    <rect x="98" y="72" width="30" height="30" rx="3" fill="#DDB04A"/><rect x="132" y="72" width="30" height="30" rx="3" fill="#E08A7B"/>
+    <rect x="40" y="114" width="70" height="5" rx="2.5" fill="#7B82E0" opacity=".8"/><rect x="40" y="124" width="110" height="5" rx="2.5" fill="#2FA595" opacity=".7"/>
+    <rect x="40" y="134" width="50" height="5" rx="2.5" fill="#DDB04A" opacity=".7"/><rect x="170" y="114" width="56" height="5" rx="2.5" fill="#E6E8F5" opacity=".35"/>
+    <rect x="120" y="166" width="24" height="22" fill="#20244A"/><rect x="88" y="186" width="88" height="9" rx="4.5" fill="#2A2E55"/>
+    <rect x="30" y="212" width="196" height="30" rx="8" fill="#171A30" stroke="#3A3F7A" stroke-width="2"/>
+    <path d="M42 222H214M42 232H214" stroke="#7B82E0" stroke-width="4" stroke-dasharray="7 5" stroke-linecap="round" opacity=".7"/>
+    <rect x="266" y="34" width="62" height="150" rx="10" fill="url(#bez)" stroke="#3A3F7A" stroke-width="2"/>
+    <circle cx="297" cy="86" r="22" fill="#0B0C16" stroke="#2FA595" stroke-width="3"/><circle cx="297" cy="86" r="5" fill="#2FA595"/>
+    <path d="M297 66v40M277 86h40M283 72l28 28M311 72l-28 28" stroke="#2FA595" stroke-width="2" opacity=".5"/>
+    <rect x="278" y="124" width="38" height="5" rx="2.5" fill="#3A3F7A"/><rect x="278" y="134" width="38" height="5" rx="2.5" fill="#3A3F7A"/>
+    <circle cx="297" cy="160" r="4" fill="#DDB04A"/>
+    <g font-size="26"><text class="float" x="4" y="62">💿</text><text class="float b" x="286" y="22">⚙️</text><text class="float c" x="244" y="206">🖱️</text></g>
+  </svg>
+</div>
+  <div class="wrap">
+    <div>
+      <h1>Computer problems, designs and data work, <em>done right.</em></h1>
+      <p class="lead">I install and set up Windows and Linux, design logos and flyers in CorelDRAW, type and organise your data in Word and Excel, and turn images and scans into editable Word documents. Based in Accra, working onsite or remotely.</p>
+      <div class="btns">
+        <a class="btn primary" href="https://wa.me/233538447468?text=Hello%20Pkay%2C%20I%20need%20help%20with%20" target="_blank" rel="noopener">Chat on WhatsApp</a>
+        <a class="btn ghost" href="#services">See services</a>
+      </div>
+      <div class="trust">
+        <span>Fast turnaround</span><span>Clear pricing</span><span>Checked before delivery</span>
+      </div>
+    </div>
+    <div class="tickets" aria-label="Examples of typical jobs">
+      <div class="tickets-label">Typical jobs I handle</div>
+      <div class="ticket"><div class="ic">💻</div><div><strong>Windows 11 clean install</strong><small>Drivers and software included</small></div><span class="ok">Done</span></div>
+      <div class="ticket"><div class="ic">🎨</div><div><strong>Logo and flyer for a shop</strong><small>Print-ready CorelDRAW files</small></div><span class="ok">Delivered</span></div>
+      <div class="ticket"><div class="ic">📊</div><div><strong>500 records into Excel</strong><small>Typed, cleaned and double-checked</small></div><span class="ok">Checked</span></div>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>What I can do for you</h2>
+      <p>Pick a service, send me the details on WhatsApp, and I'll reply with a price and a delivery time.</p>
+    </div>
+    <div class="grid">
+      <div class="card" style="--c:var(--iris)">
+        <div class="ic">💻</div><h3>PC installation and setup</h3>
+        <ul>
+          <li>Windows 7, 8, 10 and 11 clean installs</li>
+          <li>Kali Linux and dual-boot setups</li>
+          <li>Drivers, updates and everyday software</li>
+          <li>Cleanup and speed-up for slow PCs</li>
+        </ul>
+      </div>
+      <div class="card" style="--c:var(--sun)">
+        <div class="ic">🎨</div><h3>Graphic design</h3>
+        <ul>
+          <li>Logos and brand identity</li>
+          <li>Flyers, posters and banners</li>
+          <li>Business cards and letterheads</li>
+          <li>Social media graphics</li>
+        </ul>
+      </div>
+      <div class="card" style="--c:var(--teal)">
+        <div class="ic">⌨️</div><h3>Typing and data entry</h3>
+        <ul>
+          <li>Fast, accurate typing</li>
+          <li>Excel sheets and formatting</li>
+          <li>Word documents, CVs and letters</li>
+          <li>Data cleaning and organising</li>
+        </ul>
+      </div>
+      <div class="card" style="--c:var(--sun)">
+        <div class="ic">📝</div><h3>Image to text (Word)</h3>
+        <ul>
+          <li>Photos, scans and screenshots typed into Word</li>
+          <li>Handwritten and printed documents</li>
+          <li>PDF to editable Word conversion</li>
+          <li>Neatly formatted and proofread</li>
+        </ul>
+      </div>
+      <div class="card" style="--c:var(--teal)">
+        <div class="ic">🔍</div><h3>Research and reports</h3>
+        <ul>
+          <li>Web research and fact-checking</li>
+          <li>Price and product comparisons</li>
+          <li>Market and forex research summaries</li>
+          <li>Neat, formatted reports</li>
+        </ul>
+      </div>
+      <div class="card" style="--c:var(--iris)">
+        <div class="ic">🛠️</div><h3>Software and game setup</h3>
+        <ul>
+          <li>Installing licensed or free software</li>
+          <li>Game installation and troubleshooting</li>
+          <li>Basic PC troubleshooting and fixes</li>
+        </ul>
+      </div>
+      <div class="card" style="--c:var(--sun)">
+        <div class="ic">📈</div><h3>Forex basics for beginners</h3>
+        <ul>
+          <li>How the market works, in plain language</li>
+          <li>Reading charts and common terms</li>
+          <li>Risk management fundamentals</li>
+        </ul>
+        <p class="note">Education only. This is not financial advice or trading signals.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tutorials">
+  <div class="wrap">
+    <div class="sec-head"><h2>Free tutorials</h2><p>Step-by-step guides on PC setup, design and more. New ones are added regularly.</p></div>
+    <div class="chips" id="tut-chips"></div>
+    <div class="grid" id="tut-grid"></div>
+  </div>
+</section>
+
+<section class="how" id="signals">
+  <div class="wrap">
+    <div class="sec-head"><h2>Free forex signals</h2><p>Trade ideas shared for learning, with every result posted, wins and losses.</p></div>
+    <div class="disclaimer"><strong>Risk warning:</strong> forex trading carries a high risk of losing money. These signals are for education only, are not financial advice, and past results do not guarantee future ones. Never risk money you cannot afford to lose.</div>
+    <div class="tally" id="tally"></div>
+    <div class="grid" id="sig-grid"></div>
+    <div class="btns" style="margin-top:26px"><a class="btn primary" href="https://wa.me/233538447468?text=Hello%20Pkay%2C%20please%20add%20me%20to%20the%20free%20forex%20signals" target="_blank" rel="noopener">Get signals on WhatsApp</a></div>
+  </div>
+</section>
+
+<section id="earn">
+  <div class="wrap">
+    <div class="sec-head"><h2>Other legit ways to earn online</h2><p>Real options you can start with the skills and phone or PC you already have.</p></div>
+    <div class="grid">
+      <div class="card" style="--c:var(--teal)"><div class="ic">💼</div><h3>Freelance marketplaces</h3><p class="meta">Fiverr, Upwork and similar</p><p>Start with data entry, transcription and logo design. Small first jobs build reviews, and reviews bring bigger clients.</p></div>
+      <div class="card" style="--c:var(--sun)"><div class="ic">🖼️</div><h3>Sell digital products</h3><p class="meta">Templates and packs</p><p>Package logo templates, flyer packs or Excel templates once, then sell them many times.</p></div>
+      <div class="card" style="--c:var(--iris)"><div class="ic">🧑‍💻</div><h3>Virtual assistant work</h3><p class="meta">Remote admin</p><p>Businesses pay for email handling, scheduling, spreadsheets and research done remotely.</p></div>
+      <div class="card" style="--c:var(--teal)"><div class="ic">🎓</div><h3>Teach what you know</h3><p class="meta">Online tutoring</p><p>Teach PC basics, Excel or CorelDRAW to beginners over WhatsApp or video call.</p></div>
+      <div class="card" style="--c:var(--sun)"><div class="ic">🎥</div><h3>Create content</h3><p class="meta">YouTube, TikTok, blog</p><p>Turn the tutorials on this page into videos. Income comes later, once you build an audience.</p></div>
+      <div class="card" style="--c:var(--iris)"><div class="ic">🤝</div><h3>Affiliate marketing</h3><p class="meta">Recommend tools you use</p><p>Earn a commission when people buy software or services through your honest recommendation.</p></div>
+    </div>
+    <div class="scam"><strong>Stay safe:</strong> anything that asks you to pay to "unlock" a job, promises guaranteed profits, or offers to double your money is a scam. Real work pays you, not the other way round.</div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head"><h2>How it works</h2><p>Simple, with no surprises on price.</p></div>
+    <div class="steps">
+      <div class="step"><h3>Tell me what you need</h3><p>Message me on WhatsApp or email with the job and any files.</p></div>
+      <div class="step"><h3>Get a quote</h3><p>I reply with a clear price and delivery time. You agree before I start.</p></div>
+      <div class="step"><h3>Receive and review</h3><p>I deliver the work and fix anything you want changed. Pay by Mobile Money or as agreed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="about-box">
+      <div>
+        <h2>About me</h2>
+        <p>I'm a hands-on tech and design freelancer with practical experience in Windows and Kali Linux, CorelDRAW, and Microsoft Word and Excel.</p>
+        <p>I'm detail-oriented and research-driven, and I treat every job, big or small, as work I want you to come back for.</p>
+      </div>
+      <ul class="why">
+        <li>Clear communication</li>
+        <li>Honest pricing</li>
+        <li>Fast turnaround</li>
+        <li>Work checked before delivery</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SAMPLE WORK: add your CorelDRAW designs here once exported as JPG/PNG.
+     Put the images in the same folder as index.html, then add a block like:
+     <section id="work"><div class="wrap"><div class="sec-head"><h2>Sample work</h2></div>
+     <div class="grid"><img src="logo1.jpg" alt="Logo design" style="width:100%;border-radius:14px"></div></div></section> -->
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="sec-head"><h2>Let's work together</h2><p>Message me with your job and I'll get back to you quickly.</p></div>
+    <div class="contact-grid">
+      <a href="https://wa.me/233538447468?text=Hello%20Pkay%2C%20I%20need%20help%20with%20" target="_blank" rel="noopener"><span class="ic">💬</span><strong>WhatsApp</strong><span>+233 53 844 7468</span></a>
+      <a href="mailto:kwaophilip69@gmail.com"><span class="ic">📧</span><strong>Email</strong><span>kwaophilip69@gmail.com</span></a>
+      <div><span class="ic">📍</span><strong>Location</strong><span>Accra, Ghana. Onsite and remote.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Pkay Ent. &amp; Services. Fast. Accurate. Reliable.</footer>
+
+<a class="wa-float" href="https://wa.me/233538447468?text=Hello%20Pkay%2C%20I%20need%20help%20with%20" target="_blank" rel="noopener">💬 WhatsApp</a>
+
+<script>
+/* The site reads its tutorials and signals from content.json.
+   Edit them with admin.html (no code needed). The data below is only a backup copy. */
+const DEFAULT = {"notice": "", "tutorials": [{"id": "win11-usb", "title": "Install Windows 11 from a USB flash drive", "category": "Windows", "level": "Beginner", "time": "45 min", "video": "", "steps": ["Back up your files. A clean install erases the drive you install on.", "On another working PC, download the Windows 11 Media Creation Tool from microsoft.com.", "Plug in a USB drive of 8 GB or more and use the tool to create the installation USB.", "Plug the USB into the target PC, restart, and press the boot menu key (often F12, F2, Esc or Del).", "Choose the USB drive, pick your language, and click Install now.", "Select Custom install, choose the drive or partition, and click Next.", "Wait for the restarts, then set up your region, account and privacy options.", "Open Windows Update and install drivers and updates."]}, {"id": "kali-dual", "title": "Dual-boot Kali Linux with Windows", "category": "Linux", "level": "Intermediate", "time": "1 hour", "video": "", "steps": ["Back up your important files first. Changing partitions always carries some risk.", "In Windows, open Disk Management, right-click your main drive and choose Shrink Volume to free at least 40 GB.", "Turn off Fast Startup in Windows power options so the drive is released properly.", "Download the Kali Linux installer ISO from kali.org and write it to a USB drive using Rufus or balenaEtcher.", "Restart, open the boot menu, and boot from the USB drive.", "Choose Graphical install and follow the language and network steps.", "At partitioning, choose Manual and install only into the free space you created.", "Finish the install, restart, and pick Kali or Windows from the boot menu."]}], "signals": []};
+
+function el(tag, cls, text){ const e=document.createElement(tag); if(cls) e.className=cls; if(text!==undefined) e.textContent=text; return e; }
+function ytId(v){ const m=String(v||'').match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/); return m?m[1]:(/^[\w-]{11}$/.test(v)?v:null); }
+function videoEl(v){
+  if(!v) return null;
+  const id=ytId(v), box=el('div','video');
+  if(id){ const f=document.createElement('iframe'); f.src='https://www.youtube.com/embed/'+id; f.loading='lazy'; f.title='Tutorial video'; f.allowFullscreen=true; box.appendChild(f); return box; }
+  if(/\.(mp4|webm|ogg)(\?.*)?$/i.test(v)){ const vd=document.createElement('video'); vd.controls=true; vd.preload='metadata'; vd.src=v; box.appendChild(vd); return box; }
+  if(/^https?:\/\//i.test(v)){ const a=el('a','btn ghost','Watch the video'); a.href=v; a.target='_blank'; a.rel='noopener'; a.style.marginTop='14px'; return a; }
+  return null;
+}
+
+let DATA=DEFAULT, CAT='All';
+const grid=document.getElementById('tut-grid'), chips=document.getElementById('tut-chips');
+const sg=document.getElementById('sig-grid'), tally=document.getElementById('tally');
+
+function drawTutorials(){
+  const list=DATA.tutorials||[];
+  const cats=['All',...new Set(list.map(t=>t.category).filter(Boolean))];
+  if(!cats.includes(CAT)) CAT='All';
+  chips.textContent='';
+  cats.forEach(cat=>{
+    const b=el('button','chip',cat); b.type='button'; b.setAttribute('aria-pressed',cat===CAT);
+    b.onclick=()=>{ CAT=cat; drawTutorials(); };
+    chips.appendChild(b);
+  });
+  grid.textContent='';
+  const shown=list.filter(t=>CAT==='All'||t.category===CAT);
+  if(!shown.length){ grid.appendChild(el('div','empty','New tutorials are coming soon.')); return; }
+  shown.forEach(t=>{
+    const c=el('div','card'); c.style.setProperty('--c','var(--iris)');
+    c.appendChild(el('h3','',t.title));
+    c.appendChild(el('p','meta',[t.category,t.level,t.time].filter(Boolean).join(', ')));
+    const d=document.createElement('details'); const steps=t.steps||[];
+    d.appendChild(el('summary','','Read the steps ('+steps.length+')'));
+    const ol=document.createElement('ol'); steps.forEach(x=>ol.appendChild(el('li','',x))); d.appendChild(ol);
+    const v=videoEl(t.video); if(v) d.appendChild(v);
+    c.appendChild(d); grid.appendChild(c);
+  });
+}
+
+function drawSignals(){
+  sg.textContent=''; tally.textContent='';
+  const list=DATA.signals||[];
+  if(!list.length){ sg.appendChild(el('div','empty','No active signal right now. Message me on WhatsApp for the next one.')); }
+  list.forEach(x=>{
+    const side=(x.side||'BUY').toUpperCase(), status=x.status||'Open';
+    const c=el('div','card'); c.style.setProperty('--c',side==='BUY'?'var(--teal)':'#E08A7B');
+    const h=el('div','sig-head'); h.appendChild(el('h3','',x.pair||'')); h.appendChild(el('span','badge '+side.toLowerCase(),side)); c.appendChild(h);
+    const lv=el('div','levels');
+    [['Entry',x.entry],['Stop loss',x.sl],['Take profit',x.tp]].forEach(([k,v])=>{ const d=el('div'); d.appendChild(el('small','',k)); d.appendChild(el('b','',v||'-')); lv.appendChild(d); });
+    c.appendChild(lv);
+    if(x.note) c.appendChild(el('p','sig-note',x.note));
+    const f=el('div','sig-foot'); f.appendChild(el('span','',x.date||'')); f.appendChild(el('span','badge '+status.toLowerCase(),status)); c.appendChild(f);
+    sg.appendChild(c);
+  });
+  const n=s=>list.filter(x=>x.status===s).length;
+  if(list.length){ [['Wins',n('Win')],['Losses',n('Loss')],['Breakeven',n('Breakeven')],['Open',n('Open')]].forEach(([k,v])=>tally.appendChild(el('span','',k+': '+v))); }
+  tally.style.display=list.length?'flex':'none';
+}
+
+function draw(){
+  const nb=document.getElementById('notice');
+  if(DATA.notice){ nb.textContent=DATA.notice; nb.hidden=false; } else { nb.hidden=true; }
+  drawTutorials(); drawSignals();
+}
+
+draw();
+fetch('content.json?v='+Date.now(),{cache:'no-store'})
+  .then(r=>r.ok?r.json():null)
+  .then(j=>{ if(j&&typeof j==='object'){ DATA=j; draw(); } })
+  .catch(()=>{});
+</script>
+</body>
+</html>
