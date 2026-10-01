@@ -48,6 +48,7 @@
   <div class="tabs" id="tabs">
     <button data-p="tut" aria-pressed="true">Tutorials</button>
     <button data-p="sig" aria-pressed="false">Forex signals</button>
+    <button data-p="pay" aria-pressed="false">Payments</button>
     <button data-p="gen" aria-pressed="false">Site notice</button>
     <button data-p="set" aria-pressed="false">Publish settings</button>
   </div>
@@ -63,6 +64,12 @@
     <p class="hint">Newest first. When a trade closes, open it and change the status to Win, Loss or Breakeven, then publish. Post losses too, because it builds trust.</p>
     <button class="primary" id="addSig" style="margin-top:12px">+ New signal</button>
     <div style="margin-top:14px" id="sig"></div>
+  </div>
+
+  <div class="panel" id="p-pay">
+    <h2>Payment details</h2>
+    <p class="hint">Leave a box empty to hide that method. A "Ways to pay" section appears on your site once at least one is filled. Only enter addresses and IDs that <strong>receive</strong> money. Never type a seed phrase, private key or password anywhere here. After pasting an address, double-check every character.</p>
+    <div id="payf"></div>
   </div>
 
   <div class="panel" id="p-gen">
@@ -99,7 +106,7 @@
 const KEY='pkay_draft', CFG='pkay_cfg';
 const $=s=>document.querySelector(s);
 let data=JSON.parse(localStorage.getItem(KEY)||'null')||{notice:'',tutorials:[],signals:[]};
-data.tutorials=data.tutorials||[]; data.signals=data.signals||[]; data.notice=data.notice||'';
+data.tutorials=data.tutorials||[]; data.signals=data.signals||[]; data.notice=data.notice||''; data.payments=data.payments||{};
 const cfg=JSON.parse(localStorage.getItem(CFG)||'{}');
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
 const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
@@ -186,12 +193,12 @@ $('#clearTok').onclick=()=>{ delete cfg.token; $('#token').value=''; localStorag
 $('#dl').onclick=()=>{ const a=el('a',{href:URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),download:'content.json'}); a.click(); say('content.json downloaded. Upload it to your GitHub repository.'); };
 $('#imp').onclick=()=>$('#file').click();
 $('#file').onchange=async e=>{
-  try{ const j=JSON.parse(await e.target.files[0].text()); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[]}; save(); refresh(); say('Imported.'); }
+  try{ const j=JSON.parse(await e.target.files[0].text()); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[],payments:j.payments||{}}; save(); refresh(); say('Imported.'); }
   catch{ say('That file is not a valid content.json.'); }
 };
 $('#load').onclick=async()=>{
   if(!confirm('This replaces what you see here with what is live on your site. Continue?')) return;
-  try{ const r=await fetch('content.json?v='+Date.now(),{cache:'no-store'}); if(!r.ok) throw 0; const j=await r.json(); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[]}; save(); refresh(); say('Loaded the live content.'); }
+  try{ const r=await fetch('content.json?v='+Date.now(),{cache:'no-store'}); if(!r.ok) throw 0; const j=await r.json(); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[],payments:j.payments||{}}; save(); refresh(); say('Loaded the live content.'); }
   catch{ say('Could not load. This works once the admin page is on your live site.'); }
 };
 
@@ -213,7 +220,17 @@ $('#publish').onclick=async()=>{
   btn.disabled=false; btn.textContent='Publish to site';
 };
 
-function refresh(){ $('#notice').value=data.notice; drawTut(); drawSig(); }
+function drawPay(){
+  const b=$('#payf'), p=data.payments; b.textContent='';
+  b.append(
+    el('div',{className:'two'},field('MTN MoMo number',p,'momo_number',{ph:'0XX XXX XXXX'}),field('Name on the MoMo account',p,'momo_name')),
+    el('div',{className:'two'},field('USDT network',p,'usdt_network',{options:['','TRC20 (Tron)','BEP20 (BNB Smart Chain)','ERC20 (Ethereum)']}),field('USDT wallet address',p,'usdt_address')),
+    field('Monero (XMR) address',p,'xmr_address'),
+    field('Binance Pay ID',p,'binance_id'),
+    el('div',{className:'two'},field('Card payment link (https://...)',p,'card_link',{hint:'For example a Paystack or other payment link. Leave empty to hide.'}),field('Button title',p,'card_label',{ph:'Pay by card'}))
+  );
+}
+function refresh(){ $('#notice').value=data.notice; drawTut(); drawSig(); drawPay(); }
 refresh();
 </script>
 </body>

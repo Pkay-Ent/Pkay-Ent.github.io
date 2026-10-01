@@ -143,6 +143,9 @@
   .sig-note { color:var(--muted); font-size:.88rem; margin-bottom:10px; }
   .video video { position:absolute; inset:0; width:100%; height:100%; background:#000; }
 
+  .paytxt { font-family:Consolas,monospace; font-size:.9rem; word-break:break-all; margin-bottom:8px; }
+  .paywarn { color:#F0B8AD; font-size:.85rem; margin:8px 0; }
+  .card .chip { margin-top:6px; }
   /* Earn */
   .scam { background:rgba(221,176,74,.1); border:1px solid rgba(221,176,74,.4); border-radius:14px; padding:14px 18px; color:#EBD08D; margin-top:24px; font-size:.95rem; }
 
@@ -391,6 +394,14 @@
   </div>
 </section>
 
+<section id="pay" hidden>
+  <div class="wrap">
+    <div class="sec-head"><h2>Ways to pay</h2><p>Agree the job and price with me on WhatsApp first, then pay with any method below.</p></div>
+    <div class="grid" id="pay-grid"></div>
+    <div class="scam"><strong>Stay safe:</strong> only pay to the details shown on this page, and confirm the amount with me before you send anything. I will never ask you to pay into a different account.</div>
+  </div>
+</section>
+
 <!-- SAMPLE WORK: add your CorelDRAW designs here once exported as JPG/PNG.
      Put the images in the same folder as index.html, then add a block like:
      <section id="work"><div class="wrap"><div class="sec-head"><h2>Sample work</h2></div>
@@ -476,10 +487,35 @@ function drawSignals(){
   tally.style.display=list.length?'flex':'none';
 }
 
+function copyText(t,b){
+  const done=()=>{ const o=b.textContent; b.textContent='Copied'; setTimeout(()=>b.textContent=o,1600); };
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(done).catch(()=>{}); return; }
+  const a=document.createElement('textarea'); a.value=t; document.body.appendChild(a); a.select(); try{ document.execCommand('copy'); done(); }catch(e){} a.remove();
+}
+function drawPay(){
+  const p=DATA.payments||{}, g=document.getElementById('pay-grid'); g.textContent='';
+  const items=[];
+  if(p.momo_number) items.push({ic:'📱',name:'MTN Mobile Money',c:'var(--sun)',lines:[p.momo_number,p.momo_name?'Name: '+p.momo_name:''],copy:p.momo_number});
+  if(p.card_link) items.push({ic:'💳',name:p.card_label||'Pay by card',c:'var(--iris)',link:p.card_link});
+  if(p.binance_id) items.push({ic:'🟡',name:'Binance Pay',c:'var(--sun)',lines:['Pay ID: '+p.binance_id],copy:p.binance_id});
+  if(p.usdt_address) items.push({ic:'💵',name:'USDT',c:'var(--teal)',lines:[p.usdt_network?'Network: '+p.usdt_network:'',p.usdt_address],copy:p.usdt_address,warn:'Send USDT only on the network shown above, or the funds can be lost.'});
+  if(p.xmr_address) items.push({ic:'🔒',name:'Monero (XMR)',c:'var(--iris)',lines:[p.xmr_address],copy:p.xmr_address});
+  items.forEach(i=>{
+    const c=el('div','card'); c.style.setProperty('--c',i.c);
+    c.appendChild(el('div','ic',i.ic)); c.appendChild(el('h3','',i.name));
+    (i.lines||[]).filter(Boolean).forEach(l=>c.appendChild(el('p','paytxt',l)));
+    if(i.warn) c.appendChild(el('p','paywarn',i.warn));
+    if(i.copy){ const b=el('button','chip','Copy'); b.type='button'; b.onclick=()=>copyText(i.copy,b); c.appendChild(b); }
+    if(i.link && /^https:\/\//i.test(i.link)){ const a=el('a','btn primary','Pay now'); a.href=i.link; a.target='_blank'; a.rel='noopener'; c.appendChild(a); }
+    g.appendChild(c);
+  });
+  document.getElementById('pay').hidden=!g.children.length;
+}
+
 function draw(){
   const nb=document.getElementById('notice');
   if(DATA.notice){ nb.textContent=DATA.notice; nb.hidden=false; } else { nb.hidden=true; }
-  drawTutorials(); drawSignals();
+  drawTutorials(); drawSignals(); drawPay();
 }
 
 draw();

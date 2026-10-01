@@ -38,5 +38,15 @@
       ]
     }
   ],
-  "signals": []
+  "signals": [],
+  "payments": {
+    "momo_number": "",
+    "momo_name": "",
+    "usdt_network": "",
+    "usdt_address": "",
+    "xmr_address": "",
+    "binance_id": "",
+    "card_link": "",
+    "card_label": "Pay by card"
+  }
 }
