@@ -48,5 +48,55 @@
     "binance_id": "",
     "card_link": "",
     "card_label": "Pay by card"
-  }
+  },
+  "earn": [
+    {
+      "icon": "💼",
+      "title": "Freelance marketplaces",
+      "subtitle": "Fiverr, Upwork and similar",
+      "text": "Start with data entry, transcription and logo design. Small first jobs build reviews, and reviews bring bigger clients.",
+      "price": "",
+      "file": ""
+    },
+    {
+      "icon": "🖼️",
+      "title": "Sell digital products",
+      "subtitle": "Templates and packs",
+      "text": "Package logo templates, flyer packs or Excel templates once, then sell them many times.",
+      "price": "",
+      "file": ""
+    },
+    {
+      "icon": "🧑‍💻",
+      "title": "Virtual assistant work",
+      "subtitle": "Remote admin",
+      "text": "Businesses pay for email handling, scheduling, spreadsheets and research done remotely.",
+      "price": "",
+      "file": ""
+    },
+    {
+      "icon": "🎓",
+      "title": "Teach what you know",
+      "subtitle": "Online tutoring",
+      "text": "Teach PC basics, Excel or CorelDRAW to beginners over WhatsApp or video call.",
+      "price": "",
+      "file": ""
+    },
+    {
+      "icon": "🎥",
+      "title": "Create content",
+      "subtitle": "YouTube, TikTok, blog",
+      "text": "Turn the tutorials on this page into videos. Income comes later, once you build an audience.",
+      "price": "",
+      "file": ""
+    },
+    {
+      "icon": "🤝",
+      "title": "Affiliate marketing",
+      "subtitle": "Recommend tools you use",
+      "text": "Earn a commission when people buy software or services through your honest recommendation.",
+      "price": "",
+      "file": ""
+    }
+  ]
 }

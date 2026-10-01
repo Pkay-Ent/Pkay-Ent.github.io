@@ -48,6 +48,7 @@
   <div class="tabs" id="tabs">
     <button data-p="tut" aria-pressed="true">Tutorials</button>
     <button data-p="sig" aria-pressed="false">Forex signals</button>
+    <button data-p="earn" aria-pressed="false">Earn online</button>
     <button data-p="pay" aria-pressed="false">Payments</button>
     <button data-p="gen" aria-pressed="false">Site notice</button>
     <button data-p="set" aria-pressed="false">Publish settings</button>
@@ -64,6 +65,14 @@
     <p class="hint">Newest first. When a trade closes, open it and change the status to Win, Loss or Breakeven, then publish. Post losses too, because it builds trust.</p>
     <button class="primary" id="addSig" style="margin-top:12px">+ New signal</button>
     <div style="margin-top:14px" id="sig"></div>
+  </div>
+
+  <div class="panel" id="p-earn">
+    <h2>Earn online section</h2>
+    <p class="hint">Add or edit ways to make money online, or offer your own PDF guides with a price tag. Visitors with a price see a "Buy on WhatsApp" button.</p>
+    <p class="hint" style="color:#F0B8AD"><strong>Important:</strong> everything uploaded to your site is public, and anyone with the link can download it. For a paid guide, upload only a short free preview PDF, then send the full PDF on WhatsApp after the client pays. Leave the price empty (or write Free) for free guides.</p>
+    <button class="primary" id="addEarn" style="margin-top:12px">+ New item</button>
+    <div style="margin-top:14px" id="earn"></div>
   </div>
 
   <div class="panel" id="p-pay">
@@ -105,8 +114,9 @@
 <script>
 const KEY='pkay_draft', CFG='pkay_cfg';
 const $=s=>document.querySelector(s);
+const DEFAULT_EARN = [{"icon": "💼", "title": "Freelance marketplaces", "subtitle": "Fiverr, Upwork and similar", "text": "Start with data entry, transcription and logo design. Small first jobs build reviews, and reviews bring bigger clients.", "price": "", "file": ""}, {"icon": "🖼️", "title": "Sell digital products", "subtitle": "Templates and packs", "text": "Package logo templates, flyer packs or Excel templates once, then sell them many times.", "price": "", "file": ""}, {"icon": "🧑‍💻", "title": "Virtual assistant work", "subtitle": "Remote admin", "text": "Businesses pay for email handling, scheduling, spreadsheets and research done remotely.", "price": "", "file": ""}, {"icon": "🎓", "title": "Teach what you know", "subtitle": "Online tutoring", "text": "Teach PC basics, Excel or CorelDRAW to beginners over WhatsApp or video call.", "price": "", "file": ""}, {"icon": "🎥", "title": "Create content", "subtitle": "YouTube, TikTok, blog", "text": "Turn the tutorials on this page into videos. Income comes later, once you build an audience.", "price": "", "file": ""}, {"icon": "🤝", "title": "Affiliate marketing", "subtitle": "Recommend tools you use", "text": "Earn a commission when people buy software or services through your honest recommendation.", "price": "", "file": ""}];
 let data=JSON.parse(localStorage.getItem(KEY)||'null')||{notice:'',tutorials:[],signals:[]};
-data.tutorials=data.tutorials||[]; data.signals=data.signals||[]; data.notice=data.notice||''; data.payments=data.payments||{};
+data.tutorials=data.tutorials||[]; data.signals=data.signals||[]; data.notice=data.notice||''; data.payments=data.payments||{}; data.earn=data.earn||JSON.parse(JSON.stringify(DEFAULT_EARN));
 const cfg=JSON.parse(localStorage.getItem(CFG)||'{}');
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,5);
 const save=()=>localStorage.setItem(KEY,JSON.stringify(data));
@@ -193,12 +203,12 @@ $('#clearTok').onclick=()=>{ delete cfg.token; $('#token').value=''; localStorag
 $('#dl').onclick=()=>{ const a=el('a',{href:URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),download:'content.json'}); a.click(); say('content.json downloaded. Upload it to your GitHub repository.'); };
 $('#imp').onclick=()=>$('#file').click();
 $('#file').onchange=async e=>{
-  try{ const j=JSON.parse(await e.target.files[0].text()); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[],payments:j.payments||{}}; save(); refresh(); say('Imported.'); }
+  try{ const j=JSON.parse(await e.target.files[0].text()); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[],payments:j.payments||{},earn:j.earn||JSON.parse(JSON.stringify(DEFAULT_EARN))}; save(); refresh(); say('Imported.'); }
   catch{ say('That file is not a valid content.json.'); }
 };
 $('#load').onclick=async()=>{
   if(!confirm('This replaces what you see here with what is live on your site. Continue?')) return;
-  try{ const r=await fetch('content.json?v='+Date.now(),{cache:'no-store'}); if(!r.ok) throw 0; const j=await r.json(); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[],payments:j.payments||{}}; save(); refresh(); say('Loaded the live content.'); }
+  try{ const r=await fetch('content.json?v='+Date.now(),{cache:'no-store'}); if(!r.ok) throw 0; const j=await r.json(); data={notice:j.notice||'',tutorials:j.tutorials||[],signals:j.signals||[],payments:j.payments||{},earn:j.earn||JSON.parse(JSON.stringify(DEFAULT_EARN))}; save(); refresh(); say('Loaded the live content.'); }
   catch{ say('Could not load. This works once the admin page is on your live site.'); }
 };
 
@@ -230,7 +240,47 @@ function drawPay(){
     el('div',{className:'two'},field('Card payment link (https://...)',p,'card_link',{hint:'For example a Paystack or other payment link. Leave empty to hide.'}),field('Button title',p,'card_label',{ph:'Pay by card'}))
   );
 }
-function refresh(){ $('#notice').value=data.notice; drawTut(); drawSig(); drawPay(); }
+function drawEarn(){
+  const box=$('#earn'); box.textContent='';
+  data.earn.forEach((x,idx)=>{
+    const d=el('details',{className:'item'}); const sum=el('summary'); d.append(sum);
+    const upSum=()=>sum.textContent=(x.icon||'')+' '+(x.title||'(untitled item)'); upSum();
+    const ff=field('PDF file (optional)',x,'file',{ph:'Upload below, or paste a link'}), fin=ff.querySelector('input');
+    const pick=el('input',{type:'file',accept:'application/pdf,.pdf'}); pick.hidden=true;
+    const up=el('button',{textContent:'Upload a PDF',onclick:()=>pick.click()});
+    pick.onchange=async()=>{ const f=pick.files[0]; if(!f) return; say('Uploading '+f.name+'...',20000);
+      try{ const path=await uploadFile(f); x.file=path; fin.value=path; save(); say('Uploaded. Now click Publish to site.',7000); }
+      catch(e){ say(e.message||'Upload failed.',8000); } pick.value=''; };
+    d.append(
+      el('div',{className:'two'},field('Emoji icon',x,'icon',{ph:'💡',after:upSum}),field('Title',x,'title',{after:upSum})),
+      field('Short line under the title',x,'subtitle'),
+      field('Description or comment',x,'text',{area:true,rows:4}),
+      field('Price tag (optional)',x,'price',{ph:'GH₵ 50, $5 or Free'}),
+      ff, el('div',{className:'row'},up,pick),
+      controls(data.earn,idx,drawEarn));
+    box.append(d);
+  });
+}
+$('#addEarn').onclick=()=>{ data.earn.unshift({icon:'💡',title:'',subtitle:'',text:'',price:'',file:''}); save(); drawEarn(); $('#earn details').open=true; };
+
+async function uploadFile(file){
+  const {user,repo,token}=cfg, branch=cfg.branch||'main';
+  if(!user||!repo||!token) throw new Error('Open "Publish settings" and enter your GitHub details first.');
+  if(file.size>20*1024*1024) throw new Error('That file is over 20 MB. Please compress it first.');
+  const name=file.name.toLowerCase().replace(/[^a-z0-9._-]+/g,'-'), path='files/'+name;
+  const buf=new Uint8Array(await file.arrayBuffer()); let bin='';
+  for(let i=0;i<buf.length;i+=0x8000) bin+=String.fromCharCode.apply(null,buf.subarray(i,i+0x8000));
+  const api=`https://api.github.com/repos/${encodeURIComponent(user)}/${encodeURIComponent(repo)}/contents/${path}`;
+  const h={Authorization:'Bearer '+token,Accept:'application/vnd.github+json'};
+  const g=await fetch(api+'?ref='+encodeURIComponent(branch),{headers:h,cache:'no-store'});
+  const body={message:'Upload '+name,branch,content:btoa(bin)};
+  if(g.ok) body.sha=(await g.json()).sha; else if(g.status!==404) throw new Error('GitHub error '+g.status+'. Check your settings.');
+  const r=await fetch(api,{method:'PUT',headers:{...h,'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!r.ok) throw new Error(r.status===401||r.status===403?'Not allowed. Check your token has Contents: Read and write.':'Upload failed (GitHub error '+r.status+').');
+  return path;
+}
+
+function refresh(){ $('#notice').value=data.notice; drawTut(); drawSig(); drawPay(); drawEarn(); }
 refresh();
 </script>
 </body>
