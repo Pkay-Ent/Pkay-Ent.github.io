@@ -3,8 +3,8 @@
   "tutorials": [],
   "signals": [],
   "payments": {
-    "momo_number": "0535359334",
-    "momo_name": "Peter Louis Yamoah",
+    "momo_number": "",
+    "momo_name": "",
     "usdt_network": "TRC20 (Tron)",
     "usdt_address": "THSqQtsji6SsTHho9sfDdUHmX1cNZbqnpm",
     "binance_id": "64176467"
